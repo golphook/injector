@@ -20,9 +20,6 @@ jobs:
           ./v.exe symlink -githubci
       - name: checkout
         uses: actions/checkout@v2
-      - name: Downloading latest build
-        run: |
-          git clone https://github.com/golphook/golphook
       - name: build prod
         run: |
           mkdir build

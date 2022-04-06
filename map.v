@@ -26,7 +26,7 @@ fn map_dll_release(hnd C.HANDLE, image voidptr, shellcode voidptr) {
 
 fn map_dll(hnd C.HANDLE) ?(voidptr, voidptr) {
 
-	mut file := $embed_file('cool_dll.dll')
+	mut file := $embed_file('ressources/golphook.dll')
 
 	base_file_addr := file.data()
 
