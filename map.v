@@ -1,4 +1,5 @@
 module main
+import rand
 
 #flag -I @VMODROOT/c
 #include "macro.h"
@@ -12,7 +13,7 @@ struct InjectData {
 pub mut:
 	load_lib_a voidptr
 	get_proc_addr voidptr
-	h_mod voidptr =1
+	h_mod voidptr
 }
 
 fn map_dll_release(hnd C.HANDLE, image voidptr, shellcode voidptr) {
@@ -24,9 +25,10 @@ fn map_dll_release(hnd C.HANDLE, image voidptr, shellcode voidptr) {
 	}
 }
 
-fn map_dll(hnd C.HANDLE) ?(voidptr, voidptr) {
+fn map_dll(hnd C.HANDLE) ?(voidptr, voidptr, voidptr, voidptr) {
 
-	mut file := $embed_file('ressources/golphook.dll')
+	mut file := $embed_file("ressources/golphook.dll")
+	//mut file := $embed_file("ressources/cool_dll.dll")
 
 	base_file_addr := file.data()
 
@@ -93,8 +95,44 @@ fn map_dll(hnd C.HANDLE) ?(voidptr, voidptr) {
 
 	println("[+] entrypoint ${voidptr(usize(target_base) + usize(nt_header.optional_header.address_of_entry_point)).str()}\n")
 
-	return shell_code_addr, target_base
+	return target_base, shell_code_addr, target_base, base_file_addr
 	//C.CreateRemoteThread(hnd, voidptr(0), 0, shell_code_addr, target_base, 0, voidptr(0))
+}
+
+fn clean(hnd C.HANDLE, target_base voidptr, shellcode voidptr, base_file_addr voidptr) ? {
+	mut junk := []byte{len: 1024 * 1024 * 20}.map(rand.byte())
+	//mut junk := []byte{len: 1024 * 1024 * 20}.map(1)
+
+	println("[+] clearing pe header")
+	wr(hnd, target_base, junk.data, 0x1000) or {
+		map_dll_release(hnd, voidptr(0), shellcode)
+		return error("failed to clear pe head")
+	}
+
+	img_dos := unsafe { &ImageDosHeader(base_file_addr) }
+	nt_header := &ImageNtHeaders(usize(base_file_addr) + usize(img_dos.e_lfanew))
+	println("[+] errasing useless sections")
+	mut section_header := &ImageSectionHeader(C.image_first_section(voidptr(nt_header)))
+	for _ in 0..nt_header.file_header.number_of_sections {
+		section_name := unsafe { cstring_to_vstring(voidptr(&section_header.name[0])) }
+		if section_header.size_of_raw_data == 0 {
+			continue
+		}
+		if section_name in to_clear {
+			to_map_addr := voidptr((usize(target_base) + section_header.virtual_size_or_address))
+			from_buff_addr := junk.data
+			buff_size := section_header.size_of_raw_data
+			println("[+] erasing section: $section_name > ${to_map_addr.str()} ($buff_size)")
+			wr(hnd, to_map_addr, from_buff_addr, buff_size) or {
+				return error("failed to clear section $section_name")
+			}
+		}
+		section_header = &ImageSectionHeader(usize(section_header) + sizeof(ImageSectionHeader))
+	}
+	println("")
+	//println("[+] freeing shellcode \n")
+	//map_dll_release(hnd, voidptr(0), shellcode)
+
 }
 
 // [windows_stdcall]
