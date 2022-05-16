@@ -101,6 +101,8 @@ fn C.GetProcAddress(C.HMODULE, &char) voidptr
 
 fn C.CreateRemoteThread(C.HANDLE, voidptr, u16, voidptr, voidptr, u32, &u32) C.HANDLE
 
+fn C.GetLastError() u32
+
 struct ImageDosHeader
  {
 	e_magic u16
@@ -218,3 +220,37 @@ struct ImageTlsDirectory {
 	size_of_zero_fill u32
 	characteristics u32
 }
+
+struct ProcessInformation {
+  h_process C.HANDLE
+  h_thread C.HANDLE
+  process_id u32
+  thread_id u32
+}
+
+struct StartupInfoA {
+  cb u32
+  reserved &char = 0
+  desktop &char = 0
+  title &char = 0
+  x u32
+  y u32
+  x_size u32
+  y_size u32
+  x_count_chars u32
+  y_count_chars u32
+  fill_attribute u32
+  flags u32
+  show_window u16
+  reserved_2 u16
+  reserved_3 &u8 = 0
+  std_input C.HANDLE
+  std_output C.HANDLE
+  std_error C.HANDLE
+}
+
+fn C.RegOpenKeyExA(int, &char, u32, u32, &int) int
+fn C.RegQueryValueExA(int, &char, &u32, &u32, &u8, &u32) int
+fn C.RegCloseKey(int) int
+fn C.CreateProcessA(&char, &char, voidptr, voidptr, bool, u32, voidptr, &char, &StartupInfoA, &ProcessInformation) bool
+fn C.TerminateProcess(voidptr, u32) bool

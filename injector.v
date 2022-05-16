@@ -1,9 +1,21 @@
 module main
 import os
+import time
 
 fn main() {
 	println("[*] Hi golphook :)\n")
 
+	println("[+] loading vac bypass...")
+	load_vac_bypass() or {
+		panic("An error occured while loading vac bypass $err")
+	}
+
+	println("\n[+] waiting for csgo...")
+	for !is_procss_open("csgo.exe") {
+		time.sleep(1 * time.second)
+	}
+
+	println("\n[+] injecting golphook...\n")
 	target_procc := get_process(target_name) or {
 		panic("An error occured while retrievinng $target_name process info: $err")
 	}
@@ -14,7 +26,7 @@ fn main() {
 	}
 
 	println("[-] mapping dll...")
-	target_base, routine, args, file_addr := map_dll(hnd) or {
+	target_base, routine, args, file_addr := map_dll(hnd, "golphook.dll") or {
 		panic("An error occured while mapping dll: $err")
 	}
 
@@ -31,5 +43,5 @@ fn main() {
 	C.CloseHandle(hnd)
 
 	println("[*] done !")
-	os.input("")
+	time.sleep(7 * time.second)
 }

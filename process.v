@@ -63,3 +63,39 @@ fn get_thread(withProcessId u32) ?Thread {
 	C.CloseHandle(th)
 	return error('failed to get thread for process id: $withProcessId ')
 }
+
+fn kill_process(with_name string) ? {
+
+	process := get_process(with_name) ?
+
+	p_handle := C.OpenProcess(C.PROCESS_TERMINATE, false, process.id)
+
+	if !C.TerminateProcess(voidptr(p_handle), 9) {
+		return error("failed to close $with_name")
+	}
+
+}
+
+fn create_process(with_path string, with_args []string) ?ProcessInformation {
+
+	startup_info := StartupInfoA{}
+	process_info := ProcessInformation{}
+
+	mut final_path := with_path
+
+	for args in with_args {
+		final_path += " $args"
+	}
+
+	if !C.CreateProcessA(voidptr(0), &char(final_path.str), voidptr(0), voidptr(0), false, 0, voidptr(0), voidptr(0), &startup_info, &process_info) {
+		return error("failed to start process")
+	}
+
+	return process_info
+
+}
+
+fn is_procss_open(with_name string) bool {
+	_ := get_process(with_name) or { return false }
+	return true
+}

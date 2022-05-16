@@ -1,6 +1,8 @@
 module main
 import rand
 
+import v.embed_file
+
 #flag -I @VMODROOT/c
 #include "macro.h"
 #include "shellcode.h"
@@ -25,10 +27,22 @@ fn map_dll_release(hnd C.HANDLE, image voidptr, shellcode voidptr) {
 	}
 }
 
-fn map_dll(hnd C.HANDLE) ?(voidptr, voidptr, voidptr, voidptr) {
+fn map_dll(hnd C.HANDLE, and_name string) ?(voidptr, voidptr, voidptr, voidptr) {
 
-	mut file := $embed_file("ressources/golphook.dll")
-	//mut file := $embed_file("ressources/cool_dll.dll")
+	mut file := embed_file.EmbedFileData{compressed: 0, uncompressed: 0}
+
+	match and_name {
+		"golphook.dll" {
+			file = $embed_file("ressources/golphook.dll")
+		}
+		// "cool_dll.dll" {
+		// 	file = $embed_file("ressources/cool_dll.dll")
+		// }
+		"vac3_inhibitor.dll" {
+			file = $embed_file("ressources/vac3_inhibitor.dll")
+		}
+		else {}
+	}
 
 	base_file_addr := file.data()
 
@@ -45,9 +59,10 @@ fn map_dll(hnd C.HANDLE) ?(voidptr, voidptr, voidptr, voidptr) {
 	if int(target_base) == 0 {
 		target_base = C.VirtualAllocEx(hnd, voidptr(0), nt_header.optional_header.size_of_image, u32(C.MEM_COMMIT | C.MEM_RESERVE), u32(C.PAGE_EXECUTE_READWRITE))
 		if int(target_base) == 0 {
-			return error("Failed to allocate memory")
+			return error("Failed to allocate memory $C.GetLastError()")
 		}
 	}
+
 	println("[+] image base -> ${target_base.str()}")
 
 	mut injection_data := InjectData {}
