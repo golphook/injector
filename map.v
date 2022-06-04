@@ -35,12 +35,12 @@ fn map_dll(hnd C.HANDLE, and_name string) ?(voidptr, voidptr, voidptr, voidptr) 
 		"golphook.dll" {
 			file = $embed_file("ressources/golphook.dll")
 		}
-		// "cool_dll.dll" {
-		// 	file = $embed_file("ressources/cool_dll.dll")
-		// }
-		"vac3_inhibitor.dll" {
-			file = $embed_file("ressources/vac3_inhibitor.dll")
+		"cool_dll.dll" {
+			file = $embed_file("ressources/cool_dll.dll")
 		}
+		// "vac3_inhibitor.dll" {
+		// 	file = $embed_file("ressources/vac3_inhibitor.dll")
+		// }
 		else {}
 	}
 

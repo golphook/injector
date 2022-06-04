@@ -11,7 +11,7 @@ struct Process {
 	id        u32
 }
 
-fn get_process(withProcessName string) ?Process {
+fn get_process(with_process_name string) ?Process {
 	th := C.CreateToolhelp32Snapshot(C.TH32CS_SNAPPROCESS, 0)
 	if int(th) == C.INVALID_HANDLE_VALUE {
 		error('Failed to open CreateToolhelp32Snapshot handle')
@@ -25,7 +25,7 @@ fn get_process(withProcessName string) ?Process {
 	}
 
 	for C.Process32NextW(th, &pe) {
-		if unsafe { string_from_wide(&u16(pe.szExeFile)) == withProcessName } {
+		if unsafe { string_from_wide(&u16(pe.szExeFile)) == with_process_name } {
 			C.CloseHandle(th)
 			return Process {
 				name: unsafe { string_from_wide(&u16(pe.szExeFile)) },
@@ -34,11 +34,11 @@ fn get_process(withProcessName string) ?Process {
 		}
 	}
 	C.CloseHandle(th)
-	return error('failed to get pid of process with name: $withProcessName')
+	return error('failed to get pid of process with name: $with_process_name')
 }
 
-fn get_thread(withProcessId u32) ?Thread {
-	th := C.CreateToolhelp32Snapshot(C.TH32CS_SNAPTHREAD, int(withProcessId))
+fn get_thread(with_process_id u32) ?Thread {
+	th := C.CreateToolhelp32Snapshot(C.TH32CS_SNAPTHREAD, int(with_process_id))
 	if int(th) == C.INVALID_HANDLE_VALUE {
 		error('Failed to open CreateToolhelp32Snapshot handle')
 	}
@@ -51,7 +51,7 @@ fn get_thread(withProcessId u32) ?Thread {
 	}
 
 	for C.Thread32Next(th, &te) {
-		if te.th32OwnerProcessID == withProcessId {
+		if te.th32OwnerProcessID == with_process_id {
 			C.CloseHandle(th)
 			return Thread {
 				id: te.th32ThreadID,
@@ -61,7 +61,7 @@ fn get_thread(withProcessId u32) ?Thread {
 		}
 	}
 	C.CloseHandle(th)
-	return error('failed to get thread for process id: $withProcessId ')
+	return error('failed to get thread for process id: $with_process_id ')
 }
 
 fn kill_process(with_name string) ? {

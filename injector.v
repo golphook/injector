@@ -5,15 +5,15 @@ import time
 fn main() {
 	println("[*] Hi golphook :)\n")
 
-	println("[+] loading vac bypass...")
-	load_vac_bypass() or {
-		panic("An error occured while loading vac bypass $err")
-	}
-
-	println("\n[+] waiting for csgo...")
-	for !is_procss_open("csgo.exe") {
-		time.sleep(1 * time.second)
-	}
+	// println("[+] loading vac bypass...")
+	// load_vac_bypass() or {
+	// 	panic("An error occured while loading vac bypass $err")
+	// }
+	//
+	// println("\n[+] waiting for csgo...")
+	// for !is_procss_open("csgo.exe") {
+	// 	time.sleep(1 * time.second)
+	// }
 
 	println("\n[+] injecting golphook...\n")
 	target_procc := get_process(target_name) or {

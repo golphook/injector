@@ -22,6 +22,6 @@ fmt:
 	$(move_to_temp) v fmt -w . $(move_back)
 
 ci-build-prod:
-	v $(cc) -prod -o build\$(project_name).exe .
+	v $(cc) -prod -autofree -o build\$(project_name).exe .
 ci-build-debug:
 	v $(cc) -g -o build\$(project_name)-debug.exe .

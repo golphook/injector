@@ -1,5 +1,7 @@
 #include "windows.h"
 
+// this came from guided hacking
+
 typedef HINSTANCE(WINAPI* a)(char* lpLibFilename);
 typedef UINT_PTR(WINAPI* b)(HINSTANCE hModule, char* lpProcName);
 typedef BOOL(WINAPI* c)(void * hDll, DWORD dwReason, void* pReserved);
