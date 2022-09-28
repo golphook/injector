@@ -3,6 +3,8 @@ import os
 import time
 
 fn main() {
+	C.VMProtectBeginMutation(c"main")
+	
 	println("[*] Hi golphook :)\n")
 
 	// println("[+] loading vac bypass...")
@@ -44,4 +46,6 @@ fn main() {
 
 	println("[*] done !")
 	time.sleep(7 * time.second)
+
+	C.VMProtectEnd()
 }

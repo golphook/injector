@@ -6,6 +6,8 @@ import time
 
 fn get_steam_path() ?string {
 
+	C.VMProtectBeginMutation(c"vac.get_steam_path")
+
 	h_key := int(0)
 
 	if C.RegOpenKeyExA(C.HKEY_CURRENT_USER, c"Software\\Valve\\Steam", 0, C.KEY_QUERY_VALUE, &h_key) != int(C.ERROR_SUCCESS) {
@@ -30,10 +32,15 @@ fn get_steam_path() ?string {
 
 	steam_path += '"'
 
+	C.VMProtectEnd()
+
 	return steam_path
 }
 
 fn load_vac_bypass() ? {
+
+	C.VMProtectBeginMutation(c"vac.load")
+
 	for is_procss_open("csgo.exe") || is_procss_open("steam.exe") || is_procss_open("steamservice.exe") || is_procss_open("steamwebhelper.exe") {
 		kill_process("csgo.exe") or {}
 		kill_process("steam.exe") or {}
@@ -66,4 +73,6 @@ fn load_vac_bypass() ? {
 	clean(steam_process.h_process, target_base, routine, file_addr) or {
 		return error("$err")
 	}
+
+	C.VMProtectEnd()
 }

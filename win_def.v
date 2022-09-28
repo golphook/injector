@@ -1,7 +1,15 @@
 module main
 
+#flag -I @VMODROOT/exts/vmp
+
 #include "windows.h"
 #include "TlHelp32.h"
+
+
+#flag -L @VMODROOT/exts/vmp
+#flag -l vmp32
+
+#include "vmp.h"
 
 // hi
 
@@ -17,7 +25,7 @@ mut:
 	th32ParentProcessID u32
 	pcPriClassBase      u32
 	dwFlags             u32
-	szExeFile           &char = 0
+	szExeFile           &char = unsafe { nil }
 }
 
 [typedef]
@@ -230,9 +238,9 @@ struct ProcessInformation {
 
 struct StartupInfoA {
   cb u32
-  reserved &char = 0
-  desktop &char = 0
-  title &char = 0
+  reserved &char = unsafe { nil }
+  desktop &char = unsafe { nil }
+  title &char = unsafe { nil }
   x u32
   y u32
   x_size u32
@@ -243,7 +251,7 @@ struct StartupInfoA {
   flags u32
   show_window u16
   reserved_2 u16
-  reserved_3 &u8 = 0
+  reserved_3 &u8 = unsafe { nil }
   std_input C.HANDLE
   std_output C.HANDLE
   std_error C.HANDLE
@@ -254,3 +262,6 @@ fn C.RegQueryValueExA(int, &char, &u32, &u32, &u8, &u32) int
 fn C.RegCloseKey(int) int
 fn C.CreateProcessA(&char, &char, voidptr, voidptr, bool, u32, voidptr, &char, &StartupInfoA, &ProcessInformation) bool
 fn C.TerminateProcess(voidptr, u32) bool
+
+fn C.VMProtectBeginMutation(&u8)
+fn C.VMProtectEnd()

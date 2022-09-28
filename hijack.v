@@ -3,6 +3,9 @@ module main
 import time
 
 fn thread_hijacking_release(hnd_t C.HANDLE, hnd C.HANDLE, code_cave_addr voidptr, resume bool) {
+	
+	C.VMProtectBeginMutation(c"hijack_release")
+
 	if resume {
 		C.ResumeThread(hnd_t)
 	}
@@ -11,9 +14,13 @@ fn thread_hijacking_release(hnd_t C.HANDLE, hnd C.HANDLE, code_cave_addr voidptr
 		C.VirtualFreeEx(hnd, code_cave_addr, 0, u32(C.MEM_RELEASE))
 	}
 	C.CloseHandle(hnd_t)
+
+	C.VMProtectEnd()
 }
 
 fn call_dll_main_via_thread_hijacking(hnd C.HANDLE, proc_id u32, routine voidptr, args voidptr) ? {
+
+	C.VMProtectBeginMutation(c"hijack.call_dll_main_via_thread_hijacking")
 
 	thread := get_thread(proc_id) or {
 		return error("An error occured while finding a thread: $err")
@@ -44,7 +51,7 @@ fn call_dll_main_via_thread_hijacking(hnd C.HANDLE, proc_id u32, routine voidptr
 	}
 
 	mut shellcode_t := [
-		byte(0x00), 0x00, 0x00, 0x00, 0x83, 0xEC, 0x04, 0xC7, 0x04, 0x24, 0x00,
+		u8(0x00), 0x00, 0x00, 0x00, 0x83, 0xEC, 0x04, 0xC7, 0x04, 0x24, 0x00,
 		0x00, 0x00, 0x00, 0x50, 0x51, 0x52, 0x9C, 0xB9, 0x00, 0x00, 0x00, 0x00,
 		0xB8, 0x00, 0x00, 0x00, 0x00, 0x51, 0xFF, 0xD0, 0xA3, 0x00, 0x00, 0x00,
 		0x00, 0x9D, 0x5A, 0x59, 0x58, 0xC6, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -67,8 +74,8 @@ fn call_dll_main_via_thread_hijacking(hnd C.HANDLE, proc_id u32, routine voidptr
 	mut d := &&usize(shellcode_data + 0x1C + fn_offset)
 	unsafe { *d = code_cave }
 
-	mut e := &&byte(shellcode_data + 0x26 + fn_offset)
-	unsafe { *e = &byte(usize(code_cave) + check_byte_offset) }
+	mut e := &&u8(shellcode_data + 0x26 + fn_offset)
+	unsafe { *e = &u8(usize(code_cave) + check_byte_offset) }
 
 	old_thread_context.eip = u32(usize(code_cave) + fn_offset)
 
@@ -90,7 +97,7 @@ fn call_dll_main_via_thread_hijacking(hnd C.HANDLE, proc_id u32, routine voidptr
 
 	for t in 0..7 {
 
-		if (r<byte>(hnd, voidptr(usize(code_cave) + check_byte_offset)) ?) != byte(0) {
+		if (r<u8>(hnd, voidptr(usize(code_cave) + check_byte_offset)) ?) != u8(0) {
 			println("[+] executed\n")
 			break
 		}
@@ -102,4 +109,6 @@ fn call_dll_main_via_thread_hijacking(hnd C.HANDLE, proc_id u32, routine voidptr
 		time.sleep(1 * time.second)
 	}
 	//thread_hijacking_release(hnd_t, hnd, code_cave, false)
+
+	C.VMProtectEnd()
 }
