@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Document Version="2">
+    <Protection InputFileName="golphook.dll" Options="786632">
+        <Messages />
+        <Folders />
+        <Procedures>
+            <Procedure MapAddress='VMProtectMarker &quot;nuklear.bootstrap&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;nuklear.checkbox_label&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;utils.error_critical&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;utils.client_error&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;utils.load_unload_console&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;utils.msg_c&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;utils.pront&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;utils.angle_to_vec&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;utils.set_val&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;utils.pattern_scan&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;utils.wait_for_mods&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;utils.str_align&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d_sprite.begin&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d_sprite.draw&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d_sprite.end&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d_sprite.release&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d_texture.release&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d_font.draw_text&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d_font.release&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d_line.set_width&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d_line.draw&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d_line.release&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3D.create_font&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d.create_line&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d.get_device&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d.get_font&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d.bootstrap&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;d3d.release&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;offsets.load&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;weaapon_data.name&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;ent.set_abs_orig&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;ent.set_abs_angle&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;player.is_moving&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;player.bone&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;valve.msg_C&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;valve.msg&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;trace.init&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;trace.trace_ray&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;app.bootstrap&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;app.on_frame&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;app&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;chams.on_draw_model&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;cfg.get_material_str&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;cfg.bootstrap&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;cfg.export&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;cfg.import_fc&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;cfg.delete&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;cfg.save&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;cfg.rename&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;cfg.new_blank&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;cfg.change_to&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;line.draw&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;line.free&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;text.draw&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;text.free&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;rect.draw&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;rect.free&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;circle.draw&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;circle.free&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;engine.bone.fill_pos&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;engine.bone.is_in_fov&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;engine.bone.get_best_visible_pos&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;engine.target.get_bones&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;engine.target.get_best_bones&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;engine.on_frame&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;engine.collect_target&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;engine.handle_keys&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;engine.aim_at&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;engine.can_shoot&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;engine.adjust_fov_by_zoom&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;ent_cacher.on_frame&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;ent_cacher.filter_player&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;entity_fns.i_can_see&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;entity_fns.ent_weapon&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;hooks.hook_entry&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;hooks.add_hook&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;hooks.bootstrap&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;hook.release&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;hk_frame_stage_notify&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;hk_end_scene&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;hk_reset&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;hk_set_viewmodel_offsets&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;hk_get_viewmodel_fov&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;hk_wnd_proc&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;hk_lock_cursor&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;hk_draw_model&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;interfaces.get_interface&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;interfaces.get_interface_pattern&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;interfaces.bootstrap&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;killsound.asset_for_kill&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;killsound.play_sound&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;killsound.display_img&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;killsound.on_endsene&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;killsound.get_kill&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;killsound.get_kill_hs&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;killsound.is_freeze_time&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;killsound.on_frame&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;menu.bootstrap&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;menu.release&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;menu.on_end_scene&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;mneu.apply_style&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;menu.menu_item&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;menu.menu_bar&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;menu.table_combo&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;menu.color_picker&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;menu.tab_visuals&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;menu.tab_misc&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;menu.tab_engine&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;menu.tab_config&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;menu.render&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;others.on_frame&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;others.bop&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;others.specs&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;others.no_flash&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;render_queur.push&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;render_queue.len&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;render_queue.clear&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;render_queue.draw_queue&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;skins.on_frame&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;skins.skin_changer&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visual.on_frame&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visuals.on_end_scene&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visuals.crosshaire&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visuals.glow&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visuals.name&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visuals.box&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visuals.snapline&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visuals.weapon&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visuals.indicators&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visuals.fov_circle&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visuals.radar&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visuals.watermark&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visuals.calculate_box&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visuals.adjust_text_spacing_by_zoom&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;visuals.calculate_text&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;hello&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;dll_main&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;color.nkcolf&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;color.rgbaf&quot;' Options="0" CompilationType="1" />
+            <Procedure MapAddress='VMProtectMarker &quot;color.rgbf&quot;' Options="0" CompilationType="1" />
+        </Procedures>
+        <Objects />
+    </Protection>
+    <DLLBox>
+        <Folders />
+    </DLLBox>
+    <Script />
+    <LicenseManager />
+</Document>
