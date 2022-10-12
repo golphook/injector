@@ -1,11 +1,18 @@
 module main
-import os
 import time
 
 fn main() {
-	C.VMProtectBeginMutation(c"main")
+	$if prod { C.VMProtectBeginMutation(c"main") }
 	
 	println("[*] Hi golphook :)\n")
+
+	is_new_version := check_for_update() or { panic("$err") }
+
+	if is_new_version {
+		print("[*] a new client is available !")
+		time.sleep(7 * time.second)
+		exit(1)
+	}
 
 	// println("[+] loading vac bypass...")
 	// load_vac_bypass() or {
@@ -47,5 +54,5 @@ fn main() {
 	println("[*] done !")
 	time.sleep(7 * time.second)
 
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 }

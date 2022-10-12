@@ -50,3 +50,5 @@ dkms.conf
 
 build/
 .DS_Store
+
+vls.log
