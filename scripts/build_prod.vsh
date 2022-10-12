@@ -58,7 +58,7 @@ if "golphook.vmp.dll" in ls_res {
 }
 
 println("[+] building")
-execute("${@VEXE} -g -autofree -os windows -m32 . -o ${os.norm_path("build/golp.exe")}")
+execute("${@VEXE} -prod -autofree -os windows -m32 . -o ${os.norm_path("build/golp.exe")}")
 
 os.input("waiting for loader to be vmprotected...")
 
