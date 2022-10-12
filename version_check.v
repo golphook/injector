@@ -7,11 +7,13 @@ struct Release {
 	tag_name string
 }
 
-fn check_for_update() ?bool {
+fn check_for_update() ?(bool, bool) {
 
 	$if prod { C.VMProtectBeginMutation(c"update_check") }
 
 	mut branch := latest_version.split("-")[1]
+
+	is_beta := branch == "beta"
 
 	resp_text := http.get_text("https://api.github.com/repos/golphook/golphook/releases")
 	mut releases := json.decode([]Release, resp_text) ?
@@ -22,10 +24,10 @@ fn check_for_update() ?bool {
 	//dump(latest_version)
 
 	if latest_release.tag_name != latest_version {
-		return true
+		return true, is_beta
 	} 
 
 	$if prod { C.VMProtectEnd() }
 
-	return false
+	return false, is_beta
 }

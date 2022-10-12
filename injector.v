@@ -6,10 +6,14 @@ fn main() {
 	
 	println("[*] Hi golphook :)\n")
 
-	is_new_version := check_for_update() or { panic("$err") }
+	is_new_version, is_beta := check_for_update() or { panic("$err") }
 
 	if is_new_version {
-		print("[*] a new client is available !")
+		if is_beta {
+			println("[*] a new beta build is available !")
+		} else {
+			println ("[*] a new client is available !")
+		}
 		time.sleep(7 * time.second)
 		exit(1)
 	}

@@ -70,7 +70,13 @@ if "golp.vmp.exe" in ls_build {
 }
 
 println("[*] building artifact")
-szip.zip_files([os.norm_path("build/golp.exe")], os.norm_path("build/golphook.zip")) ?
+zip_name := match branch {
+	"beta" { "golphook-beta.zip" }
+	"prod" { "golphook.zip" }
+	"nightly" {"golphook-nightly.zip"}
+	else { "golphook.zip" }
+}
+szip.zip_files([os.norm_path("build/golp.exe")], os.norm_path("build/$zip_name")) ?
 
 println("[*] cleaning")
 os.write_file("consts.v", old_cst) ?
@@ -79,7 +85,7 @@ ls_build = os.ls(os.norm_path("build/")) ?
 ls_res = os.ls(os.norm_path("ressources/")) ?
 
 for f in ls_build {
-	if f != "golphook.zip" {
+	if f  !in ["golphook.zip", "golphook-beta.zip"] {
 		os.rm(os.norm_path("build/${f}")) or {}
 	}
 }
