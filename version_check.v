@@ -18,8 +18,8 @@ fn check_for_update() ?bool {
 	releases = releases.filter(it.tag_name.contains(branch))
 	latest_release := releases[0] or { panic("no available build for $branch branch") }
 	
-	dump(latest_release.tag_name)
-	dump(latest_version)
+	//dump(latest_release.tag_name)
+	//dump(latest_version)
 
 	if latest_release.tag_name != latest_version {
 		return true
