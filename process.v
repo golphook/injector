@@ -13,7 +13,7 @@ struct Process {
 
 fn get_process(with_process_name string) ?Process {
 
-	C.VMProtectBeginMutation(c"proc.get_proc")
+	$if prod { C.VMProtectBeginMutation(c"proc.get_proc") }
 
 	th := C.CreateToolhelp32Snapshot(C.TH32CS_SNAPPROCESS, 0)
 	if int(th) == C.INVALID_HANDLE_VALUE {
@@ -38,14 +38,14 @@ fn get_process(with_process_name string) ?Process {
 	}
 	C.CloseHandle(th)
 	
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 
 	return error('failed to get pid of process with name: $with_process_name')
 }
 
 fn get_thread(with_process_id u32) ?Thread {
 
-	C.VMProtectBeginMutation(c"proc.get_thread")
+	$if prod { C.VMProtectBeginMutation(c"proc.get_thread") }
 
 	th := C.CreateToolhelp32Snapshot(C.TH32CS_SNAPTHREAD, int(with_process_id))
 	if int(th) == C.INVALID_HANDLE_VALUE {
@@ -71,14 +71,14 @@ fn get_thread(with_process_id u32) ?Thread {
 	}
 	C.CloseHandle(th)
 
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 
 	return error('failed to get thread for process id: $with_process_id ')
 }
 
 fn kill_process(with_name string) ? {
 
-	C.VMProtectBeginMutation(c"proc.kill")
+	$if prod { C.VMProtectBeginMutation(c"proc.kill") }
 
 	process := get_process(with_name) ?
 
@@ -88,13 +88,13 @@ fn kill_process(with_name string) ? {
 		return error("failed to close $with_name")
 	}
 
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 
 }
 
 fn create_process(with_path string, with_args []string) ?ProcessInformation {
 
-	C.VMProtectBeginMutation(c"proc.create")
+	$if prod { C.VMProtectBeginMutation(c"proc.create") }
 
 	startup_info := StartupInfoA{}
 	process_info := ProcessInformation{}
@@ -109,7 +109,7 @@ fn create_process(with_path string, with_args []string) ?ProcessInformation {
 		return error("failed to start process")
 	}
 
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 
 	return process_info
 
@@ -117,11 +117,11 @@ fn create_process(with_path string, with_args []string) ?ProcessInformation {
 
 fn is_procss_open(with_name string) bool {
 	
-	C.VMProtectBeginMutation(c"proc.is_open")
+	$if prod { C.VMProtectBeginMutation(c"proc.is_open") }
 
 	_ := get_process(with_name) or { return false }
 
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 
 	return true
 }

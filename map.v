@@ -19,8 +19,8 @@ pub mut:
 }
 
 fn map_dll_release(hnd C.HANDLE, image voidptr, shellcode voidptr) {
-	
-	C.VMProtectBeginMutation(c"map.release")
+
+	//C.VMProtectBeginMutation(c"map.release")
 
 	if int(image) != 0 {
 		C.VirtualFreeEx(hnd, image, 0, u32(C.MEM_RELEASE))
@@ -29,12 +29,12 @@ fn map_dll_release(hnd C.HANDLE, image voidptr, shellcode voidptr) {
 		C.VirtualFreeEx(hnd, shellcode, 0, u32(C.MEM_RELEASE))
 	}
 
-	C.VMProtectEnd()
+	//C.VMProtectEnd()
 }
 
 fn map_dll(hnd C.HANDLE, and_name string) ?(voidptr, voidptr, voidptr, voidptr) {
 
-	C.VMProtectBeginMutation(c"map.map_dll")
+	$if prod { C.VMProtectBeginMutation(c"map.map_dll") }
 
 	mut file := embed_file.EmbedFileData{compressed: 0, uncompressed: 0}
 
@@ -117,7 +117,7 @@ fn map_dll(hnd C.HANDLE, and_name string) ?(voidptr, voidptr, voidptr, voidptr) 
 
 	println("[+] entrypoint ${voidptr(usize(target_base) + usize(nt_header.optional_header.address_of_entry_point)).str()}\n")
 
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 
 	return target_base, shell_code_addr, target_base, base_file_addr
 	//C.CreateRemoteThread(hnd, voidptr(0), 0, shell_code_addr, target_base, 0, voidptr(0))
@@ -125,7 +125,7 @@ fn map_dll(hnd C.HANDLE, and_name string) ?(voidptr, voidptr, voidptr, voidptr) 
 
 fn clean(hnd C.HANDLE, target_base voidptr, shellcode voidptr, base_file_addr voidptr) ? {
 
-	C.VMProtectBeginMutation(c"map.clean")
+	$if prod { C.VMProtectBeginMutation(c"map.clean") }
 
 	mut junk := []byte{len: 1024 * 1024 * 20}.map(rand.u8())
 	//mut junk := []byte{len: 1024 * 1024 * 20}.map(1)
@@ -158,9 +158,9 @@ fn clean(hnd C.HANDLE, target_base voidptr, shellcode voidptr, base_file_addr vo
 	}
 	println("")
 	//println("[+] freeing shellcode \n")
-	//map_dll_release(hnd, voidptr(0), shellcode)
+	map_dll_release(hnd, voidptr(0), shellcode)
 
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 }
 
 // [windows_stdcall]

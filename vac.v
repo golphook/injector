@@ -3,7 +3,7 @@ import time
 
 // this https://github.com/zyhp/vac3_inhibitor in V
 
-
+/*
 fn get_steam_path() ?string {
 
 	C.VMProtectBeginMutation(c"vac.get_steam_path")
@@ -75,4 +75,4 @@ fn load_vac_bypass() ? {
 	}
 
 	C.VMProtectEnd()
-}
+}*/

@@ -4,7 +4,7 @@ import time
 
 fn thread_hijacking_release(hnd_t C.HANDLE, hnd C.HANDLE, code_cave_addr voidptr, resume bool) {
 	
-	C.VMProtectBeginMutation(c"hijack_release")
+	$if prod { C.VMProtectBeginMutation(c"hijack_release") }
 
 	if resume {
 		C.ResumeThread(hnd_t)
@@ -15,12 +15,12 @@ fn thread_hijacking_release(hnd_t C.HANDLE, hnd C.HANDLE, code_cave_addr voidptr
 	}
 	C.CloseHandle(hnd_t)
 
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 }
 
 fn call_dll_main_via_thread_hijacking(hnd C.HANDLE, proc_id u32, routine voidptr, args voidptr) ? {
 
-	C.VMProtectBeginMutation(c"hijack.call_dll_main_via_thread_hijacking")
+	$if prod { C.VMProtectBeginMutation(c"hijack.call_dll_main_via_thread_hijacking") }
 
 	thread := get_thread(proc_id) or {
 		return error("An error occured while finding a thread: $err")
@@ -110,5 +110,5 @@ fn call_dll_main_via_thread_hijacking(hnd C.HANDLE, proc_id u32, routine voidptr
 	}
 	//thread_hijacking_release(hnd_t, hnd, code_cave, false)
 
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 }

@@ -3,7 +3,7 @@ module main
 // read one type from virtual memory of a given process a handle.
 // this function return an optional of the type given
 pub fn r<T>(fromProc C.HANDLE, atAddr voidptr) ?T {
-	C.VMProtectBeginMutation(c"r")
+	$if prod { C.VMProtectBeginMutation(c"r") }
 
 	mut data := T{}
 	mut bytes_read := u16(0)
@@ -12,7 +12,7 @@ pub fn r<T>(fromProc C.HANDLE, atAddr voidptr) ?T {
 		return error('failed to read data at address: $atAddr')
 	}
 
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 
 	return data
 }
@@ -21,7 +21,7 @@ pub fn r<T>(fromProc C.HANDLE, atAddr voidptr) ?T {
 // this functioncan throw
 pub fn w<T>(fromProc C.HANDLE, atAddr voidptr, withData &T) ? {
 
-	C.VMProtectBeginMutation(c"mem.w")
+	$if prod { C.VMProtectBeginMutation(c"mem.w") }
 
 	mut bytes_wrote := u16(0)
 
@@ -29,14 +29,14 @@ pub fn w<T>(fromProc C.HANDLE, atAddr voidptr, withData &T) ? {
 		return error('failed to write data at address: $atAddr')
 	}
 
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 }
 
 // write one type to virtual memory of a given process a handle.
 // this functioncan throw
 pub fn wr(fromProc C.HANDLE, atAddr voidptr, withData voidptr, andSize u32) ? {
 
-	C.VMProtectBeginMutation(c"mem.wr")
+	$if prod { C.VMProtectBeginMutation(c"mem.wr") }
 
 	mut bytes_wrote := u16(0)
 
@@ -44,14 +44,14 @@ pub fn wr(fromProc C.HANDLE, atAddr voidptr, withData voidptr, andSize u32) ? {
 		return error('failed to write data at address: $atAddr')
 	}
 	
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 }
 
 // read X elements of an array of the type given from virtual memory of a giver process a handle.
 // this function return an optional of an array of the type given
 pub fn rar<T>(fromProc C.HANDLE, atAddr voidptr, andSize u32, output []T) ? {
 
-	C.VMProtectBeginMutation(c"meme.rar")
+	$if prod { C.VMProtectBeginMutation(c"meme.rar") }
 
 	mut bytes_read := u16(0)
 
@@ -60,14 +60,14 @@ pub fn rar<T>(fromProc C.HANDLE, atAddr voidptr, andSize u32, output []T) ? {
 		return error('failed to read data from array with size $andSize at address: $atAddr')
 	}
 
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 }
 
 // write an array to virtual memory of a given process a handle.
 // this function can throw
 pub fn wa<T>(fromProc C.HANDLE, atAddr voidptr, withData []T) ? {
 
-	C.VMProtectBeginMutation(c"mem.wa")
+	$if prod { C.VMProtectBeginMutation(c"mem.wa") }
 
 	mut bytes_wrote := u16(0)
 
@@ -76,5 +76,5 @@ pub fn wa<T>(fromProc C.HANDLE, atAddr voidptr, withData []T) ? {
 		return error('failed to write data from array with size $withData.len at address: $atAddr')
 	}
 
-	C.VMProtectEnd()
+	$if prod { C.VMProtectEnd() }
 }
