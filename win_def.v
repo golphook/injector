@@ -5,11 +5,14 @@ module main
 #include "windows.h"
 #include "TlHelp32.h"
 
+$if prod {
+	#flag -L @VMODROOT/exts/vmp
+	#flag -l vmp32
+}
 
-#flag -L @VMODROOT/exts/vmp
-#flag -l vmp32
-
-#include "vmp.h"
+$if prod {
+	#include "vmp.h"
+}
 
 // hi
 
@@ -90,7 +93,6 @@ fn C.Thread32Next(C.HANDLE, voidptr) bool
 
 fn C.OpenProcess(u32, bool, u32) C.HANDLE
 fn C.OpenThread(u32, bool, u32) C.HANDLE
-fn C.CloseHandle(C.HANDLE) bool
 
 fn C.GetThreadContext(C.HANDLE, voidptr) bool
 fn C.SetThreadContext(C.HANDLE, voidptr) bool
